@@ -59,9 +59,9 @@ In Python, entry points can vary depending on how the program is designed and st
    Work done!
    ```
 
-   > [!Exercise]
-   > 1. What happens if no input is provided
-   > 2. What happens if `lots!` is passed as input?
+> [!Exercise]
+> 1. What happens if no input is provided
+> 2. What happens if `lots!` is passed as input?
 
 
    There are two potential issues with this approach:
