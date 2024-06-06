@@ -10,66 +10,69 @@ Imagine you have a large dataset generated from experiments stored in various fo
 
 An *entry point* refers to the specific location within a program where the execution begins. It's the starting point from which the program's instructions are executed and control is transferred to the code defined at that location.
 
-For command-line applications or scripts, the entry point is typically the main function or block of code responsible for handling command-line arguments, initializing the program, and executing its core functionality.
 
 In Python, entry points can vary depending on how the program is designed and structured:
 
-1. Python Interpreter: When executing a Python script or module directly from the command line, the entry point is typically the top-level code within the script or module.
+1. **Python Interpreter**: When executing a Python script or module directly from the command line, the entry point is typically the top-level code within the script or module.
     ```python
-    # 00motivation/00script.py
-    from time import sleep
+   # _0_motivation/_0_script.py
+   # Entry point of the script at the top of the file
+   from time import sleep
 
-    print('hello from script')
-    print('This script does some serious work')
-    print('Doing some work...')
-    sleep(2)
-    print('Work done!')
-    ```
-    Now from a Python session we can run `script.py`.
-    ```python
-    >>> import script
-    ```
+   print("Hello from", __name__) # look at this line for a moment. What's peculiar about it?
+   print("This script does some serious work")
 
-    Alternatively, the script can be executed more conveniently from the terminal.
+   t = input("How much work are we doing? ")
+   amount_of_work = int(t)
 
-    ```shell
-    $ python script.py
-    hello from script
-    This script does some serious work
-    Doing some work...
-    Work done!
-    $
+   print("Doing some work...")
+
+   for _ in range(amount_of_work):
+      sleep(0.5)
+      print(".", end="", flush=True)
+   print("\nWork done!")
     ```
 
-    Often external data is needed. We could provide this data by hand using, for example, the `input` function.
+   Now from a Python session we can run the code in `_0_motivation/_0_script.py` file.
 
-    ```python
-    # 00script.py
+   ```python
+   $ python
+   >>> import _0_motivation._0_script
+   Hello from _0_motivation._0_script
+   This script does some serious work
+   How much work are we doing? 2
+   Doing some work...
+   ..
+   Work done!
+   >>>
+   ```
 
-    from time import sleep
+   Alternatively, the script can be executed more conveniently from the terminal.
 
-    print('Hello from script')
-    print('This script does some serious work')
+   ```shell
+   $ python _0_motivation._0_script.py
+   Hello from __main__
+   This script does some serious work
+   How much work are we doing? 2
+   Doing some work...
+   ..
+   Work done!
+   ```
 
-    t = input('How much work are we doing? ')
-    amount_of_work = int(t)
+   > [!Exercise]
+   > 1. What happens if no input is provided
+   > 2. What happens if `lots!` is passed as input?
 
-    print('Doing some work...')
 
-    for _ in range(amount_of_work):
-        sleep(.5)
-        print('.', end='', flush=True)
-    print('\nWork done!')
+   There are two potential issues with this approach:
 
-    ```
+   <ol type="a">
+   <li>Error prone:  What if, by accident, bad input is provided?</li>
+   <li>Scalability: What if the input data was in a file with thousands of values to process? What if, in turn, thousands of such files needed to be processed?</li>
+   <li>No documentation for users: Prior knowledge of the behavior of the script is needed to use it correctly</li>
+   </ol>
 
-There are two potential issues with this approach:
-
-<ol type="a">
-  <li>Error prone:  What if, by accident, bad input is provided?</li>
-  <li>Scalability: What if the input data was in a file with thousands of values to process? What if, in turn, thousands of such files needed to be processed?</li>
-  <li>No documentation for users: Prior knowledge of the behavior of the script is needed to use it correctly</li>
-</ol>
+2. **Jupyter Notebooks**: Everybody (well, [almost](https://youtu.be/7jiPeIFXb6U?si=oB8s_jFoEH7jPs7O) everybody) loves Jupyter Notebooks for their versatility when exploring data, building visualizations, prototyping, and showcasing results. However, their structure may not be optimal for batch processing tasks where the same code needs to be applied across multiple datasets or inputs efficiently. Additionally, every cell in the notebook can serve as a potential entry point for code execution. While this flexibility allows for interactive exploration and experimentation, it can also lead to challenges in code organization and execution flow control.
 
 Enter CLI applications!
 
@@ -78,7 +81,7 @@ For CLI tools, the entry point is often a designated function (traditionally `ma
 
 ### `sys.argv`
 
-In the world of command-line interfaces (CLIs) in Python, `sys.argv` is the gateway to interacting with your Python scripts through the terminal. It's a list in Python that contains the command-line arguments passed to the script. Let's explore how `sys.argv` works in Python.
+In the world of command-line interfaces (CLIs) in Python, `sys.argv` is the gateway to interacting with your Python scripts through the terminal. It's a list in Python that contains the command-line arguments passed to the script. Let's explore how `sys.argv` works in Python. Consider the following script
 
 ```python
 # 01sysarv/01explore-sysarv.py
@@ -90,11 +93,15 @@ print(f'{sys.argv=}')
 
 Run the command from your terminal
 ```bash
-python 01sysarv/01explore-sysarv.py foo bar 1 123 a,b,c,
+python 01sysarv/01explore-sysarv.py foo bar 1 123 a,b,c, path/to/a/file
 ```
-You will see the following output: `sys.argv=['01sysarv/01explore-sysarv.py', 'foo', 'bar', '1', '123', 'a,b,c,']`. It seems like Python collected the string of characters following the command and split it at the spaces. We can now use these data in our program and make it more flexible and extensible.
+You will see the following output:
+```
+sys.argv=['01sysarv/01explore-sysarv.py', 'foo', 'bar', '1', '123', 'a,b,c,', 'path/to/a/file']
+```
+It seems like Python collected the string of characters following the command and split it at the spaces. We can now use these metadata in our program and make it more flexible and extensible.
 
-While `sys.argv` is a good starting point, it has limitations, especially when dealing with complex data inputs or user interactions. Imagine passing multiple file paths, flags, or configuration options through the command line. Handling these inputs robustly and intuitively can quickly become unwieldy.
+While `sys.argv` is a good starting point, it has limitations, especially when dealing with complex inputs or user interactions. Imagine passing multiple file paths, flags, or configuration options through the command line. Handling these inputs robustly and intuitively can quickly become unwieldy.
 
 ```python
 # 00motivation/04script-small-only.py
@@ -122,7 +129,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main() # this is the code's entry point when the script is run as a script from the command line
 
 ```
 
@@ -237,7 +244,7 @@ python 02argparse/02subparser-commands.py nth -n 3 --nums 1 2 3
 5. Make the `stat` command an option instead of a positional argument
 
 ### Switches
-Also known as flags or options, switches are used to toggle specific features, settings, or configurations within a CLI. They typically take the form of boolean flags where their presence or absence determines whether certain behavior is enabled or not. A common switch used in many CLIs is `-v` to allow more detailed output feedback during during a program's runtime. In `02argparse/03flags.py` a `--verbose` option was added. The `action="store_true"` setting sets the value of `args.verbose` to `True` when invoked in the command line.
+Also known as flags or options, switches are used to toggle specific features, settings, or configurations within a CLI. They typically take the form of boolean flags where their presence or absence determines whether certain behavior is enabled or not. A common switch used in many CLIs is `-v` to allow more detailed output feedback during a program's runtime. In `02argparse/03flags.py` a `--verbose` option was added. The `action="store_true"` setting sets the value of `args.verbose` to `True` when invoked in the command line.
 
 #### Exercise
 
