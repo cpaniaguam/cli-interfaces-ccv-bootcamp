@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
+"""
+This script does some serious work
+"""
+
 from time import sleep
 
-
 def main():
-    print("hello from script")
-    print("This script does some serious work")
+    print("Hello from", __name__) # look at this line for a moment. What's peculiar about it?
+    print(__doc__) # How about this one?
 
     t = input("How much work are we doing? ")
     amount_of_work = int(t)
