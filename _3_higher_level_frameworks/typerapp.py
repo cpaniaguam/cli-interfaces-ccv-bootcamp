@@ -12,7 +12,9 @@ def mean(nums: list[float]):
     """
     compute the mean of a list of numbers
     """
-    return sum(nums) / len(nums)
+    r = sum(nums) / len(nums)
+    print(r)
+    
 
 @app.command()
 def kth(nums: list[float], k: int = 2):
@@ -20,14 +22,18 @@ def kth(nums: list[float], k: int = 2):
     compute the kth order statistic of a list of numbers
     """
     nums.sort()
-    return nums[k - 1]
+    r = nums[k - 1]
+    print(r)
+
 
 @app.command()
 def lp(nums: list[float], p: float = 2):
     """
     compute the lp norm of a list of numbers
     """
-    return sum(abs(x) ** p for x in nums) ** (1 / p)
+    r = sum(abs(x) ** p for x in nums) ** (1 / p)
+    print(r)
+
 
 if __name__ == "__main__":
     app()
