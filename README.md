@@ -316,60 +316,59 @@ commands:
 Example: python _3_subparser-commands.py lp -p 2 -n 1 2 3 4 5
 ```
 
-#### Exercise
-1. Run the following commands and see what happens. `cd` into the `_2_argparse` directory first.
-```bash
-python _3_subparser-commands.py mean --help
-```
-```bash
-python _3_subparser-commands.py lp --help
-```
-```bash
-python _3_subparser-commands.py kth --help
-```
-```bash
-python _3_subparser-commands.py mean --nums 1 2 3
-```
-```bash
-python _3_subparser-commands.py lp --nums 1 2 3
-```
-```bash
-python _3_subparser-commands.py lp -p=2 --nums 1 2 3
-```
-```bash
-python _3_subparser-commands.py kth -k 3 --nums 1 2 3
-```
-2. Name some of the advantages of using commands in your CLIs (modularity, encapsulation, documentation, readability, consistency, extensibility, etc.)
-3. Add a new parameter-free command to the CLI (e.g. `geomean`, `max`, etc.)
-4. How would you add a feature to the CLI so that the program accepts a list of numbers from a data file
-5. How would you make adding a new command to the CLI easier.
+   #### Exercise
+      1. Run the following commands and see what happens. `cd` into the `_2_argparse` directory first.
+      ```bash
+      python _3_subparser-commands.py mean --help
+      ```
+      ```bash
+      python _3_subparser-commands.py lp --help
+      ```
+      ```bash
+      python _3_subparser-commands.py kth --help
+      ```
+      ```bash
+      python _3_subparser-commands.py mean --nums 1 2 3
+      ```
+      ```bash
+      python _3_subparser-commands.py lp --nums 1 2 3
+      ```
+      ```bash
+      python _3_subparser-commands.py lp -p=2 --nums 1 2 3
+      ```
+      ```bash
+      python _3_subparser-commands.py kth -k 3 --nums 1 2 3
+      ```
+      2. Name some of the advantages of using commands in your CLIs (modularity, encapsulation, documentation, readability, consistency, extensibility, etc.)
+      3. Add a new parameter-free command to the CLI (e.g. `geomean`, `max`, etc.)
+      4. How would you add a feature to the CLI so that the program accepts a list of numbers from a data file (see _mutual exclusion_ in the [argparse documentation](https://docs.python.org/3/library/argparse.html#mutual-exclusion))
+      5. Given the repetition of boiler plate code to add commands, how would you make adding a new command to the CLI easier?
 
 ### Switches
 Also known as flags or options, switches are used to toggle specific features, settings, or configurations within a CLI. They typically take the form of boolean flags where their presence or absence determines whether certain behavior is enabled or not. A common switch used in many CLIs is `-v` to allow more detailed output feedback during a program's runtime. In `_2_argparse/_4_flags.py` a `--verbose` option was added to the parent parser. The `action="store_true"` setting sets the value of `args.verbose` to `True` when invoked in the command line.
 
-#### Exercise
+   #### Exercise
+
+   1. Again from the `_2_argparse` directory, run the following commands and see what happens.
+      ```bash
+      python _4_flags.py kth -k 3 --nums 1 2 3
+      ```
+      ```bash
+      python _4_flags.py kth -k 3 --nums 1 2 3 --verbose
+      ```
 
 
-1. Again from the `_2_argparse` directory, run the following commands and see what happens.
-   ```bash
-   python _4_flags.py kth -k 3 --nums 1 2 3
-   ```
-   ```bash
-   python _4_flags.py kth -k 3 --nums 1 2 3 --verbose
-   ```
-
-
-1. Add a log switch to the CLI that will display the input arguments to stdout
-2. Add a quiet switch to the CLI that will suppress all output to stdout
-3. How would you handle the case where the user provides two or three of the log, verbose, and quiet switches?
+   1. Add a log switch to the CLI that will display the input arguments to stdout
+   2. Add a quiet switch to the CLI that will suppress all output to stdout
+   3. How would you handle the case where the user provides two or three of the log, verbose, and quiet switches?
 
 ## Higher-level Frameworks
 
 `argparse`, as we have seen, is a robust framework for building command-line interfaces (CLIs) with extensive functionality and flexibility. However,  there are other higher-level frameworks for building CLIs within the Python ecosystem. One of them is `Typer`, which presents a compelling evolution in CLI development, offering a more streamlined and perhaps more *Pythonic* approach.
 
-Leveraging Python's type annotations, Typer eliminates much of the boilerplate associated with argument parsing, automatically inferring types and generating CLI interfaces from function signatures. This simplifies the development process, allowing developers to focus more on application logic rather than parsing intricacies. Typer can also seamlessly integrate with Python's async capabilities, making it an ideal choice for building modern CLI applications.
+Leveraging Python's type annotations, Typer eliminates much of the boilerplate associated with argument parsing, automatically inferring types and generating CLI interfaces from function signatures. This simplifies the development process, allowing developers to focus more on application logic rather than parsing intricacies.
 
-In this brief section, we explore a few of the [many capabilities of `typer`](https://typer.tiangolo.com/features/). Consider the `_3_higher-level-frameworks/typerapp.py` script. After creating a `typer.Typer` instance, `app`, we add commands to it  using the `command` *decorator*.
+In this brief section, we explore a few of the [many capabilities of `typer`](https://typer.tiangolo.com/features/). Consider the `_3_higher-level-frameworks/typerapp.py` script. After creating a `typer.Typer` instance, `app`, we add commands to it using the `command` *decorator*.
 
 ### Exercise
 
@@ -387,10 +386,16 @@ In this brief section, we explore a few of the [many capabilities of `typer`](ht
       python typerapp.py mean --help
       ```
       ```bash
+      python typerapp.py mean 1 2 3 4
+      ```
+      ```bash
       python typerapp.py kth --help
       ```
       ```bash
-      python typerapp.py kth
+      python typerapp.py kth --k
+      ```
+      ```bash
+      python typerapp.py kth 1 2 3 4 --k 3
       ```
    2. Under this new framework, how do you think new subcommands or flags can be defined?
    3. Consider going over the tutorial at https://typer.tiangolo.com/tutorial/
