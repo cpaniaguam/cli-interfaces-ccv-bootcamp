@@ -43,7 +43,7 @@ def main():
     with open(args.datafile, "r") as file:
         data = [int(line.rstrip("\n")) for line in file]
 
-    print(f"Hello from {script}")
+    print(f"Hello from {__name__}")
     print("We are going to do a lot of work now...")
 
     for t in data:
