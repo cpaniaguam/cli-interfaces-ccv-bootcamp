@@ -253,7 +253,7 @@ We will now look into some of the most useful and frequently used features of `a
 
 We can add further flexibility to our CLIs by creating custom commands.
 
-Consider the `_2_argparse/funcs.py` module; it contains various functions that compute numerical descriptors for numerical vectors/arrays. In the `_2_argparse/_2_commands.py` file there is a CLI that leverages all of these functions using *positional* and *optional* (also referred as keyword or named) arguments.
+Consider the `_2_argparse/funcs.py` module; it contains various functions that compute numerical descriptors for numerical vectors/arrays. In the `_2_argparse/_2_commands.py` file there is a CLI that leverages all of these functions using *positional* and *optional* (also referred as *keyword* or *named*) arguments.
 
 Positional arguments are mandatory and their order matters. They are identified by their position in the command line input, rather than by a specific keyword or option string. On the other hand, arguments that are prefixed with one or two `-` are optional (unless specified with `required=True`), and they can be specified in any order.
 
@@ -283,9 +283,11 @@ python _2_argparse/_2_commands.py --foo 1 2 3
 python _2_argparse/_2_commands.py mean  --numbers 1 2 3 > result.txt
 ```
 ```bash
-python _2_argparse/_2_commands.py 1st --help
+python _2_argparse/_2_commands.py 2nd --help
 ```
-Play time! Choose one of the following activities to do right now.
+**Play time!**
+
+   Choose one of the following activities to do right now.
 
    2. What happens if `nargs` is set to `1` instead of `"+"` or deleted?
    4. Add a new command to the CLI (e.g. mode, median, variance, standard deviation, etc.)
@@ -294,7 +296,7 @@ Play time! Choose one of the following activities to do right now.
 
 ### Subparsers
 
-In `_2_argparse/_2_commands.py` all commands shared the argument `nums`. Often, however, it's useful for commands to have different sets of arguments, different sets of options, or their particular documentation. In `_2_argparse/_3_subparser-commands.py` we refactor `_2_argparse/_2_commands.py` to add two new commands, `lp` and `kth`, which compute the _l-p_ norm and the _kth-order_ statistic of a numeric array, respectively. Note how the common arguments have been defined in the `parent_parser` object which is passed to each `subparser` (one per set of commands) object under the the `parent` argument. Look at the help page for the script with
+In `_2_argparse/_2_commands.py` all commands shared the argument `nums`. Often, however, it's useful for commands to have different sets of arguments, different sets of options, or their particular documentation. In `_2_argparse/_3_subparser-commands.py` we refactor `_2_argparse/_2_commands.py` to add two new commands, `lp` and `kth`, which compute the _lp_ norm and the _kth_ order statistic of a numeric array, respectively. Note how the common arguments have been defined in the `parent_parser` object which is passed to each `subparser` (one per set of commands) object under the the `parent` argument. Look at the help page for the script with
 
 ```bash
 python _2_argparse/_3_subparser-commands.py --help
