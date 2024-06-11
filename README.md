@@ -370,6 +370,8 @@ Leveraging Python's type annotations, Typer eliminates much of the boilerplate a
 
 In this brief section, we explore a few of the [many capabilities of `typer`](https://typer.tiangolo.com/features/). Consider the `_3_higher-level-frameworks/typerapp.py` script. After creating a `typer.Typer` instance, `app`, we add commands to it using the `command` *decorator*.
 
+**Note**: run `pip install typer` from your terminal to install the `typer` package if necessary.
+
 ### Exercise
 
    1. `From the `_3_higher_level_frameworks` directory, run the following commands and see what happens.
