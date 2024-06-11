@@ -5,6 +5,9 @@ Do some serious work with data from a file
 import argparse
 from time import sleep
 
+def do_work(t):
+    sleep(t)
+
 
 def main():
     script = __file__
@@ -47,7 +50,7 @@ def main():
         # Small jobs only please
         if t < args.bound:
             print(f"Doing some work for {t} seconds...")
-            sleep(t)
+            do_work(t)
 
     print("Work done!")
 
