@@ -17,7 +17,7 @@ def main():
         "--nums",
         type=float,
         nargs="+",
-        help="Numbers to compute mean of",
+        help="numbers to compute mean of",
         required=True,
     )
 
