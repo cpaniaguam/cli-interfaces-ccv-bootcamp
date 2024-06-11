@@ -10,11 +10,11 @@ def do_work(t):
 
 
 def main():
-    script = __file__
 
     # Set up the argument parser
     parser = argparse.ArgumentParser(
-        description=__doc__, prog=script
+        description=__doc__,
+        prog="dowork",
     )
 
     parser.add_argument(
