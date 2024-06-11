@@ -16,7 +16,7 @@ def main():
         "--nums",
         type=float,
         nargs="+",
-        help="Numbers to compute mean of",
+        help="numbers to compute mean of",
         required=True,
     )
 
@@ -43,8 +43,9 @@ def main():
         description=kth.__doc__,  # shown in the main help message
         help=kth.__doc__,  # shown in the help message for the command
         parents=[parent_parser],
+        epilog="Example: python _3_subparser-commands.py kth -k 3 --nums 1 2 3 4 5"
     )
-    kth_parser.add_argument("-k", type=int, default=2, help="value for the kth order statistic")
+    kth_parser.add_argument("-k", type=int, default=2, help="value for the kth order statistic", required=True)
 
     # Subparser for the lp command
     lp_parser = subparsers.add_parser(
