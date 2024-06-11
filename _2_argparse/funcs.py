@@ -24,6 +24,6 @@ def lp(numbers, p=2):
 
 def kth(numbers, k=2):
     """
-    compute the kth ordered statistic of a list of numbers
+    compute the kth order statistic of a list of numbers
     """
     return sorted(numbers)[k - 1]
