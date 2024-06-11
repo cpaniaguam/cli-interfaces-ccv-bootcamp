@@ -10,7 +10,7 @@ stat_functions = {
     "mean": mean,
     "geomean": geom_mean,
     "l2": lambda nums: lp(nums, 2),
-    "1st": lambda nums: kth(nums, 2),
+    "2nd": lambda nums: kth(nums, 2),
 }
 
 
