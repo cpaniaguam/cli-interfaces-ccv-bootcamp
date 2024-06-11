@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# _0_motivation/_0_script.py
 """
 This script does some serious work
 """
