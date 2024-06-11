@@ -154,6 +154,9 @@ It seems like Python collected the string of characters following the command ex
 
    ```python
    # _1_sysarv/_2_script.py
+   """
+   This script does a lot of work
+   """
 
    import sys
    from time import sleep
@@ -162,6 +165,7 @@ It seems like Python collected the string of characters following the command ex
       sleep(t)
 
    def main():
+      print(__doc__)
       # ISSUE: args are positional, need prior knowledge of the script for correct use
       script, bound, filepath = sys.argv # ISSUE: What if there are not enough or extra arguments?
       print(f'{script=}, {bound=}, {filepath=}')
