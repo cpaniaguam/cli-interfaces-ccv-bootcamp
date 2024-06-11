@@ -13,82 +13,110 @@ An *entry point* refers to the specific location within a program where the exec
 
 In the Python ecosystem, entry points can vary depending on how the program is designed and structured:
 
-1. **Python Interpreter**: When executing a Python script or module directly from the command line, the entry point is typically the top-level code within the script or module.
-   ```python
-   # _0_motivation/_0_script.py
-   """
-   This script does some serious work
-   """
+1. **Python Interpreter**
+   When executing a Python script or module directly from the command line, the entry point is typically the top-level code within the script or module.
+      ```python
+      # _0_motivation/_0_script.py
+      """
+      This script does some serious work
+      """
 
-   # Entry point of the script at the top of the file
-   from time import sleep
+      # Entry point of the script at the top of the file
+      from time import sleep
 
-   print("Hello from", __name__) # look at this line for a moment. What's peculiar about it?
-   print(__doc__) # How about this one?
+      print("Hello from", __name__) # look at this line for a moment. What's peculiar about it?
+      print(__doc__) # How about this one?
 
-   t = input("How much work are we doing? ")
-   amount_of_work = int(t)
+      t = input("How much work are we doing? ")
+      amount_of_work = int(t)
 
-   print("Doing some work...")
+      print("Doing some work...")
 
-   for _ in range(amount_of_work):
-      sleep(0.5)
-      print(".", end="", flush=True)
-   print("\nWork done!")
-    ```
+      for _ in range(amount_of_work):
+         sleep(0.5)
+         print(".", end="", flush=True)
+      print("\nWork done!")
+      ```
 
-   Now from a Python session we can run the code in the `_0_motivation/_0_script.py` file.
+      Now from a Python session we can run the code in the `_0_motivation/_0_script.py` file.
 
-   ```python
-   $ python -q
-   >>> import _0_motivation._0_script
-   Hello from _0_motivation._0_script
+      ```python
+      $ python -q
+      >>> import _0_motivation._0_script
+      Hello from _0_motivation._0_script
 
-   This script does some serious work
+      This script does some serious work
 
-   How much work are we doing? 2
-   Doing some work...
-   ..
-   Work done!
-   >>>
-   ```
+      How much work are we doing? 2
+      Doing some work...
+      ..
+      Work done!
+      >>>
+      ```
 
-   Alternatively, the script can be executed more conveniently from the terminal.
+      Alternatively, the script can be executed more conveniently from the terminal.
 
-   ```shell
-   $ python _0_motivation/_0_script.py
-   Hello from __main__
+      ```shell
+      $ python _0_motivation/_0_script.py
+      Hello from __main__
 
-   This script does some serious work
+      This script does some serious work
 
-   How much work are we doing? 2
-   Doing some work...
-   ..
-   Work done!
-   ```
+      How much work are we doing? 2
+      Doing some work...
+      ..
+      Work done!
+      ```
 
-   **Exercise**
-      - What happens if `lots!` is passed as input?
+      **Exercise**
+         - What happens if `lots!` is passed as input?
 
-      - What's the deal with the `__name__` and `__doc__` variables?
+         - What's the deal with the `__name__` and `__doc__` variables?
 
 
-2. **Jupyter Notebooks**: Everybody (well, [almost](https://youtu.be/7jiPeIFXb6U?si=oB8s_jFoEH7jPs7O) everybody) loves Jupyter Notebooks for their versatility when exploring data, building visualizations, prototyping, and showcasing results. However, their structure may not be optimal for batch processing tasks where the same code needs to be applied across multiple datasets or inputs efficiently. Additionally, every cell in the notebook can serve as a potential entry point for code execution. While this flexibility allows for interactive exploration and experimentation, it can also lead to challenges in code organization and execution flow control.
+2. **Jupyter Notebooks**
+   Everybody (well, [almost](https://youtu.be/7jiPeIFXb6U?si=oB8s_jFoEH7jPs7O) everybody) loves Jupyter Notebooks for their versatility when exploring data, building visualizations, prototyping, and showcasing results. However, their structure may not be optimal for batch processing tasks where the same code needs to be applied across multiple datasets or inputs efficiently. Additionally, every cell in the notebook can serve as a potential entry point for code execution. While this flexibility allows for interactive exploration and experimentation, it can also lead to challenges in code organization and execution flow control.
 
 As you probably have realized, there are several potential issues with these approaches:
 
-<ol type="a">
-<li>Error prone:  What if, by accident, bad or no input is provided?</li>
-<li>Scalability: What if the input data was in a file with thousands of values to process? What if, in turn, thousands of such files needed to be processed?</li>
-<li>Flexibility: What if each data set required its own set of input metadata?</li>
-<li>No documentation for users: Prior knowledge of the behavior of the script/notebook is needed to use it correctly</li>
-</ol>
+   <ol type="a">
+   <li>Error prone:  What if, by accident, bad or no input is provided?</li>
+   <li>Scalability: What if the input data was in a file with thousands of values to process? What if, in turn, thousands of such files needed to be processed?</li>
+   <li>Flexibility: What if each data set required its own set of input metadata?</li>
+   <li>No documentation for users: Prior knowledge of the behavior of the script/notebook is needed to use it correctly</li>
+   </ol>
 
 
 Enter CLI applications!
 
 ## CLI Applications
-For CLI tools, the entry point is often a designated function (traditionally `main`) or block of code in a module (file) responsible for parsing command-line arguments and triggering the appropriate actions based on those arguments.
+For CLI tools, the entry point is often a designated function (traditionally `main`) or block of code in a module (file) responsible for parsing command-line arguments and triggering the appropriate actions based on those arguments. In `_0_motivation/_1_script-with-custom-entry-point.py` we refactor our original script into a main function with a custom entry point.
+
+
+   ```python
+   # _0_motivation/_1_script-with-custom-entry-point.py
+
+   from time import sleep
+
+   def main():
+      print("hello from script")
+      print("This script does some serious work")
+
+      t = input("How much work are we doing? ")
+      amount_of_work = int(t)
+
+      print("Doing some work...")
+
+      for _ in range(amount_of_work):
+         sleep(0.5)
+         print(".", end="", flush=True)
+      print("\nWork done!")
+
+
+   if __name__ == "__main__":
+      # This is the entry point of the script
+      main()
+   ```
 
 ### `sys.argv`
 
@@ -108,7 +136,7 @@ Now run this command from your terminal:
 python _1_sysarv/_1_explore-sysarv.py
 ```
 ```bash
-python _1_sysarv/_1_explore-sysarv.py foo bar 1 123 a,b,c, path/to/a/file
+python _1_sysarv/_1_explore-sysarv.py foo --bar 1 123 a,b,c, path/to/a/file
 ```
 You will see the following output:
 ```
@@ -186,33 +214,33 @@ While `sys.argv` is a good starting point, it has limitations, especially when d
 
 To overcome the limitations of manually parsing `sys.argv`, Python provides the `argparse` module, a powerful tool for parsing command-line arguments in a structured and user-friendly manner. In `_2_argparse/_1_script.py` there is a refactored version of `_1_sysarv/_2_script.py` using `argparse`.
 
-### Exercise
-1. Keeping in mind the issues `_1_sysarv/_2_script.py` has, run `_2_argparse/_1_script.py` with the following command arguments and see what happens:
-```bash
-   python _2_argparse/_1_script.py --help
-```
-```bash
-   python _2_argparse/_1_script.py -h
-```
-```bash
-   python _2_argparse/_1_script.py
-```
-2. Run the script with the following arguments and observe what happens:
-```bash
-   python _2_argparse/_1_script.py -b 1
-```
-```bash
-   python _2_argparse/_1_script.py -f inputdata.dat
-```
-```bash
-   python _2_argparse/_1_script.py --bound 2 --file otherinputdata.dat
-```
-```bash
-   python _2_argparse/_1_script.py -b foo
-```
-```bash
-   python _2_argparse/_1_script.py --foo bar
-```
+ **Exercise**
+   1. Keeping in mind the issues `_1_sysarv/_2_script.py` has, run `_2_argparse/_1_script.py` with the following command arguments and see what happens:
+   ```bash
+      python _2_argparse/_1_script.py --help
+   ```
+   ```bash
+      python _2_argparse/_1_script.py -h
+   ```
+   ```bash
+      python _2_argparse/_1_script.py
+   ```
+   2. Run the script with the following arguments and observe what happens:
+   ```bash
+      python _2_argparse/_1_script.py -b 1
+   ```
+   ```bash
+      python _2_argparse/_1_script.py -f inputdata.dat
+   ```
+   ```bash
+      python _2_argparse/_1_script.py --bound 2 --file otherinputdata.dat
+   ```
+   ```bash
+      python _2_argparse/_1_script.py -b foo
+   ```
+   ```bash
+      python _2_argparse/_1_script.py --foo bar
+   ```
 
 As you can see, `argparse` handled all the bookkeeping for us, including adding documentation, enforcing correct usage, error reporting, default values, and correct argument parsing. This streamlined approach to command-line argument handling greatly simplifies script development and enhances user experience.
 
