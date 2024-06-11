@@ -155,7 +155,7 @@ It seems like Python collected the string of characters following the command ex
    ```python
    # _1_sysarv/_2_script.py
    """
-   This script does a lot of work
+   This script does some serious work
    """
 
    import sys
@@ -165,9 +165,9 @@ It seems like Python collected the string of characters following the command ex
       sleep(t)
 
    def main():
-      print(__doc__)
       # ISSUE: args are positional, need prior knowledge of the script for correct use
       script, bound, filepath = sys.argv # ISSUE: What if there are not enough or extra arguments?
+      print(__doc__)
       print(f'{script=}, {bound=}, {filepath=}')
 
 
@@ -189,7 +189,6 @@ It seems like Python collected the string of characters following the command ex
 
    if __name__ == '__main__':
       main() # this is the code's entry point when the script is run from the command line
-
    ```
 
    Now run the script with the following command arguments and see what happens:
@@ -212,7 +211,7 @@ It seems like Python collected the string of characters following the command ex
       python _1_sysarv/_2_script.py 2 inputdata.dat foo
    ```
 
-While `sys.argv` is a good starting point, it has limitations, especially when dealing with complex inputs or user interactions. Imagine passing multiple file paths, flags, or configuration options through the command line. Handling these inputs robustly and intuitively can quickly become unwieldy. Enter `argparse`
+While `sys.argv` is a good starting point, it has limitations, especially when dealing with complex inputs or user interactions. Imagine passing multiple file paths, flags, or configuration options through the command line. Handling these inputs robustly and intuitively can quickly become unwieldy. Enter `argparse`!
 
 ### `argparse`
 
