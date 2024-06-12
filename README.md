@@ -366,7 +366,7 @@ Also known as flags or options, switches are used to toggle specific features, s
 
 `argparse`, as we have seen, is a robust framework for building command-line interfaces (CLIs) with extensive functionality and flexibility. However,  there are other higher-level frameworks for building CLIs within the Python ecosystem. One of them is `Typer`, which presents a compelling evolution in CLI development, offering a more streamlined and perhaps more *Pythonic* approach.
 
-Leveraging Python's type annotations, Typer eliminates much of the boilerplate associated with argument parsing, automatically inferring types and generating CLI interfaces from function signatures. This simplifies the development process, allowing developers to focus more on application logic rather than parsing intricacies.
+Leveraging [Python's type annotations](https://docs.python.org/3/library/typing.html), Typer eliminates much of the boilerplate associated with argument parsing, automatically inferring types and generating CLI interfaces from function signatures. This simplifies the development process, allowing developers to focus more on application logic rather than parsing intricacies.
 
 In this brief section, we explore a few of the [many capabilities of `typer`](https://typer.tiangolo.com/features/). Consider the `_3_higher-level-frameworks/typerapp.py` script. After creating a `typer.Typer` instance, `app`, we add commands to it using the `command` *decorator*.
 
