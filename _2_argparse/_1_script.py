@@ -24,7 +24,7 @@ def main():
         type=int,  # type specifies to what type the argument should be converted
         dest="bound",  # dest is the name of the attribute in the args object
         default=2,  # default is the value the argument will have if not provided
-        help="upper bound for work time",  # help is the help message for the argument
+        help="upper bound for work time (default: 2)",  # help is the help message for the argument
     )
 
     parser.add_argument(
@@ -32,12 +32,11 @@ def main():
         "--file",
         metavar="path",
         dest="datafile",
-        default="inputdata.dat",
         help="the path to the data file",
     )
 
     # Parse the command line arguments
-    args = parser.parse_args()
+    args = parser.parse_args() # using sys.argv by default
 
     # Do work with the parsed arguments
     with open(args.datafile, "r") as file:

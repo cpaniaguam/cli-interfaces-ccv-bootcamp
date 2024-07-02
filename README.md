@@ -3,20 +3,21 @@
 ## Motivation
 Scientific computing often involves complex data processing tasks that require automation and reproducibility. Command-line interface (CLI) tools offer a powerful solution for streamlining such tasks, allowing researchers to efficiently manage and execute their code across different environments.
 
-### Use Case
-Imagine you have a large dataset generated from experiments stored in various formats. You need to preprocess this data, perform statistical analysis, and generate visualizations—all while ensuring the process is scalable and reproducible. A CLI tool can automate this pipeline, enabling you to effortlessly execute and manage your code on a computing cluster or even one-off computations. By transitioning from code entry points, such as Jupyter notebooks or regular scripts, to a CLI tool, you gain greater control and scalability.
+### Two Everyday Examples
+
+- `git` CLI
+- `python` interpreter
 
 ## Running your code - Entry Points
 
 An *entry point* refers to the specific location within a program where the execution begins. It's the starting point from which the program's instructions are executed and control is transferred to the code defined at that location.
 
 
-In the Python ecosystem, entry points can vary depending on how the program is designed and structured:
+In the Python ecosystem, entry points can vary depending on how the program is structured and executed:
 
 1. **Python Interpreter**
    When executing a Python script or module directly from the command line, the entry point is typically the top-level code within the script or module.
       ```python
-      # _0_motivation/_0_script.py
       """
       This script does some serious work
       """
@@ -69,13 +70,10 @@ In the Python ecosystem, entry points can vary depending on how the program is d
       ```
 
       **Exercise**
-   
+
       1. What happens if `lots!` is passed as input?
       2. What's the deal with the `__name__` and `__doc__` variables?
 
-
-3. **Jupyter Notebooks**
-   Everybody (well, [almost](https://youtu.be/7jiPeIFXb6U?si=oB8s_jFoEH7jPs7O) everybody) loves Jupyter Notebooks for their versatility when exploring data, building visualizations, prototyping, and showcasing results. However, their structure may not be optimal for batch processing tasks where the same code needs to be applied across multiple datasets or inputs efficiently. Additionally, every cell in the notebook can serve as a potential entry point for code execution. While this flexibility allows for interactive exploration and experimentation, it can also lead to challenges in code organization and execution flow control.
 
 As you probably have realized, there are several potential issues with these approaches:
 
@@ -94,13 +92,15 @@ For CLI tools, the entry point is often a designated function (traditionally `ma
 
 
    ```python
-   # _0_motivation/_1_script-with-custom-entry-point.py
+   """
+   This script does some serious work
+   """
 
    from time import sleep
 
    def main():
-      print("hello from script")
-      print("This script does some serious work")
+      print("Hello from", __name__) # look at this line for a moment. What's peculiar about it?
+      print(__doc__) # How about this one?
 
       t = input("How much work are we doing? ")
       amount_of_work = int(t)

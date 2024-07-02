@@ -29,7 +29,6 @@ def main():
     subparsers = parser.add_subparsers(title="commands", dest="command", required=True)
 
     # Subparser for the mean command
-    # param_free_parser =
     subparsers.add_parser(
         "mean",
         description=mean.__doc__,  # shown in the main help message
@@ -49,7 +48,7 @@ def main():
 
     # Subparser for the lp command
     lp_parser = subparsers.add_parser(
-        "lp", description=lp.__doc__, help=lp.__doc__, parents=[parent_parser]
+        "lp", description="foo", help=lp.__doc__, parents=[parent_parser]
     )
     lp_parser.add_argument(
         "-p", type=float, default=2, help="The p value for the lp norm"
