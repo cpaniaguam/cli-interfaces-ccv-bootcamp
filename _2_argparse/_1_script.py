@@ -33,6 +33,7 @@ def main():
         metavar="path",
         dest="datafile",
         help="the path to the data file",
+        required=True,
     )
 
     # Parse the command line arguments
