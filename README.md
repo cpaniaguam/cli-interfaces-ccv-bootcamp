@@ -69,12 +69,12 @@ In the Python ecosystem, entry points can vary depending on how the program is d
       ```
 
       **Exercise**
-         - What happens if `lots!` is passed as input?
+   
+      1. What happens if `lots!` is passed as input?
+      2. What's the deal with the `__name__` and `__doc__` variables?
 
-         - What's the deal with the `__name__` and `__doc__` variables?
 
-
-2. **Jupyter Notebooks**
+3. **Jupyter Notebooks**
    Everybody (well, [almost](https://youtu.be/7jiPeIFXb6U?si=oB8s_jFoEH7jPs7O) everybody) loves Jupyter Notebooks for their versatility when exploring data, building visualizations, prototyping, and showcasing results. However, their structure may not be optimal for batch processing tasks where the same code needs to be applied across multiple datasets or inputs efficiently. Additionally, every cell in the notebook can serve as a potential entry point for code execution. While this flexibility allows for interactive exploration and experimentation, it can also lead to challenges in code organization and execution flow control.
 
 As you probably have realized, there are several potential issues with these approaches:
